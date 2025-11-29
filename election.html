@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>School Election System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{font-family:Arial;margin:0;background:#eef1f7;}
+
+/* ===== SCHOOL HEADER ===== */
+.school-header{
+  background:#ffffff;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  border-bottom:4px solid #004aad;
+}
+.school-header img{
+  width:80px;
+  height:80px;
+  border-radius:10px;
+}
+.school-header .info h2{
+  margin:0;
+  color:#004aad;
+  font-size:26px;
+}
+.school-header .info p{
+  margin:5px 0 0;
+  font-size:15px;
+}
+
+/* ===== NAVIGATION ===== */
+.top-bar{display:flex;background:#004aad;}
+.nav{flex:1;padding:15px;color:#fff;font-size:18px;border:none;background:#004aad;cursor:pointer;}
+.nav.active{background:#002f6c;}
+
+.container{max-width:900px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;}
+h1{text-align:center;color:#003c8f;}
+input[type=text]{width:100%;padding:12px;border-radius:8px;border:1px solid #999;margin-bottom:15px;}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;}
+.card{border:1px solid #ccc;padding:10px;border-radius:10px;text-align:center;cursor:pointer;transition:0.2s;}
+.card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+.card img{width:130px;height:120px;object-fit:cover;border-radius:10px;}
+.card .name{font-weight:bold;margin-top:8px;}
+
+button{width:100%;padding:14px;background:#004aad;color:#fff;border:none;font-size:18px;border-radius:8px;cursor:pointer;}
+.message{text-align:center;margin-top:10px;font-size:18px;font-weight:bold;}
+
+.position-block{background:#f4f8ff;border-left:6px solid #004aad;padding:15px;margin-bottom:20px;border-radius:8px;}
+.result-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.result-img{width:55px;height:45px;border-radius:6px;object-fit:cover;}
+.percent{color:#004aad;font-weight:bold;margin-right:8px;}
+.bar-container{width:100%;height:10px;background:#dce4f3;border-radius:20px;overflow:hidden;}
+.bar{height:10px;background:#004aad;border-radius:20px;transition:width 1s;}
+
+.reset-btn{
+  background:#d40000 !important;
+  margin-top:20px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- ================= SCHOOL HEADER ================= -->
+<div class="school-header">
+    <img src="https://via.placeholder.com/150/004aad/ffffff?text=LOGO">
+    <div class="info">
+        <h2>MUSTAQBAL SECONDARY SCHOOL</h2>
+        <p><strong>2025 Student Council Elections</strong> — Vote responsibly, one student at a time.</p>
+    </div>
+</div>
+
+<!-- ================= NAVIGATION ================= -->
+<div class="top-bar">
+<button class="nav active" onclick="showPage('vote')">Vote</button>
+<button class="nav" onclick="showPage('results')">Results</button>
+</div>
+
+<div class="container">
+
+<!-- ================= VOTING ================= -->
+<section id="vote">
+<h1>Cast Your Vote</h1>
+
+<label>Roll Number</label>
+<input id="roll" type="text" placeholder="Enter Roll Number">
+
+<h2>Head Boy</h2>
+<div class="grid">
+  <label class="card"><input type="radio" name="hb" value="Ahmed Ali"><img src="https://via.placeholder.com/150/004aad/ffffff?text=A.A"><div class="name">Ahmed Ali</div></label>
+  <label class="card"><input type="radio" name="hb" value="Mohamed Farah"><img src="https://via.placeholder.com/150/004aad/ffffff?text=M.F"><div class="name">Mohamed Farah</div></label>
+  <label class="card"><input type="radio" name="hb" value="Ismail Noor"><img src="https://via.placeholder.com/150/004aad/ffffff?text=I.N"><div class="name">Ismail Noor</div></label>
+</div>
+
+<h2>Head Girl</h2>
+<div class="grid">
+  <label class="card"><input type="radio" name="hg" value="Amina Omar"><img src="https://via.placeholder.com/150/f542a7/ffffff?text=A.O"><div class="name">Amina Omar</div></label>
+  <label class="card"><input type="radio" name="hg" value="Hani Abdi"><img src="https://via.placeholder.com/150/f542a7/ffffff?text=H.A"><div class="name">Hani Abdi</div></label>
+  <label class="card"><input type="radio" name="hg" value="Nimco Hassan"><img src="https://via.placeholder.com/150/f542a7/ffffff?text=N.H"><div class="name">Nimco Hassan</div></label>
+</div>
+
+<h2>Vice Head Boy</h2>
+<div class="grid">
+  <label class="card"><input type="radio" name="vhb" value="Yasin Adan"><img src="https://via.placeholder.com/150/004aad/ffffff?text=Y.A"><div class="name">Yasin Adan</div></label>
+  <label class="card"><input type="radio" name="vhb" value="Khalid Muse"><img src="https://via.placeholder.com/150/004aad/ffffff?text=K.M"><div class="name">Khalid Muse</div></label>
+</div>
+
+<h2>Vice Head Girl</h2>
+<div class="grid">
+  <label class="card"><input type="radio" name="vhg" value="Saida Mohamed"><img src="https://via.placeholder.com/150/f542a7/ffffff?text=S.M"><div class="name">Saida Mohamed</div></label>
+  <label class="card"><input type="radio" name="vhg" value="Roda Ahmed"><img src="https://via.placeholder.com/150/f542a7/ffffff?text=R.A"><div class="name">Roda Ahmed</div></label>
+</div>
+
+<button onclick="submitVote()">Submit Vote</button>
+<p id="msg" class="message"></p>
+
+</section>
+
+<!-- ================= RESULTS ================= -->
+<section id="results" style="display:none;">
+<h1>Live Results</h1>
+
+<div id="resultsBox"></div>
+
+<!-- RESET BUTTON -->
+<button class="reset-btn" onclick="resetVotes()">Reset All Votes</button>
+
+</section>
+
+</div>
+
+<script>
+/* === PAGE SWITCH === */
+function showPage(p){
+  document.getElementById("vote").style.display = p==="vote"?"block":"none";
+  document.getElementById("results").style.display = p==="results"?"block":"none";
+  if(p==="results") loadResults();
+
+  document.querySelectorAll(".nav").forEach(btn=>btn.classList.remove("active"));
+  event.target.classList.add("active");
+}
+
+/* === CLEAR FORM === */
+function clearForm(){
+  document.getElementById("roll").value = "";
+  document.querySelectorAll("input[type=radio]").forEach(r=>r.checked=false);
+}
+
+/* === SUBMIT VOTE === */
+function submitVote(){
+  const roll = document.getElementById("roll").value.trim();
+  const hb = get("hb");
+  const hg = get("hg");
+  const vhb = get("vhb");
+  const vhg = get("vhg");
+
+  if(!roll || !hb || !hg || !vhb || !vhg)
+    return show("Please fill all fields!", "red");
+
+  let data = JSON.parse(localStorage.getItem("votes")||"{}");
+
+  if(data[roll])
+    return show("This roll number already voted!", "red");
+
+  data[roll] = {hb,hg,vhb,vhg};
+  localStorage.setItem("votes", JSON.stringify(data));
+
+  show("Vote submitted successfully!", "green");
+
+  /* 🔵 CLEAR FORM FOR NEXT STUDENT */
+  clearForm();
+}
+
+function get(n){
+  const x = document.querySelector(`input[name="${n}"]:checked`);
+  return x ? x.value : null;
+}
+
+function show(m,c){
+  const e=document.getElementById("msg");
+  e.innerText=m; e.style.color=c;
+}
+
+/* === LOAD RESULTS === */
+function loadResults(){
+  const box=document.getElementById("resultsBox");
+  const data = JSON.parse(localStorage.getItem("votes")||"{}");
+
+  let counts = {
+    "Head Boy":{},
+    "Head Girl":{},
+    "Vice Head Boy":{},
+    "Vice Head Girl":{}
+  };
+
+  Object.values(data).forEach(v=>{
+    add(counts["Head Boy"],v.hb);
+    add(counts["Head Girl"],v.hg);
+    add(counts["Vice Head Boy"],v.vhb);
+    add(counts["Vice Head Girl"],v.vhg);
+  });
+
+  box.innerHTML = render(counts);
+}
+
+function add(obj, name){
+  if(!obj[name]) obj[name]=0;
+  obj[name]++;
+}
+
+/* === RESET VOTES === */
+function resetVotes(){
+  if(!confirm("Are you sure you want to delete ALL votes?"))
+    return;
+
+  localStorage.removeItem("votes");
+  loadResults();
+  alert("All votes have been reset!");
+}
+
+/* === RENDER RESULTS === */
+function render(counts){
+  let html="";
+  for(let pos in counts){
+    const group = counts[pos];
+    const total = Object.values(group).reduce((a,b)=>a+b,0);
+
+    html += `<div class="position-block"><h3>${pos}</h3>`;
+
+    if(total===0){
+      html += "<p>No votes yet.</p></div>";
+      continue;
+    }
+
+    let sorted = Object.entries(group).sort((a,b)=>b[1]-a[1]);
+
+    sorted.forEach(([name,count])=>{
+      const pct = ((count/total)*100).toFixed(1);
+      html+=`
+      <div class="result-row">
+        <div><img class="result-img"
+             src="https://via.placeholder.com/80/004aad/ffffff?text=${name.split(' ').map(x=>x[0]).join('.')}">
+        <strong>${name}</strong></div>
+        <div><span class="percent">${pct}%</span> <span class="votes">${count} votes</span></div>
+      </div>
+      <div class="bar-container"><div class="bar" style="width:${pct}%"></div></div>
+      `;
+    });
+
+    html+="</div>";
+  }
+
+  return html;
+}
+</script>
+
+</body>
+</html>
